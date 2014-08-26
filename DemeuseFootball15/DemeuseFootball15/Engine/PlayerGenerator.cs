@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using DemeuseFootball15.Enumeration;
 using DemeuseFootball15.Players;
 using DemeuseFootball15.Traits;
 
@@ -34,13 +35,31 @@ namespace DemeuseFootball15.Engine
 			var specialModSlot1 = _addSpecialModifier();
 			var specialModSlot2 = _addSpecialModifier();
 
-			player.PhysicalTraits = _generatePhysicalTraits(mod, player);
+			player.Age = _rnd.Next(14, 15);
+
+			// Strength is needed for running style
+			Strength strength = new Strength();
+			strength.Randomize(_rnd, player.Age);
+
+			player.PhysicalTraits = _generatePhysicalTraits(player);
 			player.Drive = _generateDrive(1);
-			player.Athleticism = _generateAthleticism(player.PhysicalTraits, 1);
 			player.Character = _generateCharacter(1);
 			player.Talent = _generateTalent(1);
+			player.Athleticism = _generateAthleticism(player, strength, 1);
 
-			player.Age = _rnd.Next(14, 16);
+			// Goals
+
+			// Influences
+
+			// Body Type
+			player.Body = _getBodyType(player);
+
+			// Run Type
+			player.RunningStyle = _getRunStyle(player, strength);
+
+			// Throw Type
+
+			// Player postions
 
 			return player;
 		}
@@ -48,6 +67,64 @@ namespace DemeuseFootball15.Engine
 		private static int _getNextInt()
 		{
 			return _rnd.Next(1, 100);
+		}
+
+		private static BodyType _getBodyType(Player player)
+		{ 
+			var over = player.PhysicalTraits.Weight.Overweight;
+
+			if (over > 10)
+			{
+				return BodyType.OverWeight;
+			}
+			else if (over > 0)
+			{
+				var val = _rnd.Next(1, 8);
+
+				while (val == 2 || val == 3)
+				{
+					val = _rnd.Next(1, 8);
+				}
+
+				return (BodyType)val;
+			}
+			else if (over < -10)
+			{
+				return BodyType.Scrawny;
+			}
+			else
+			{
+				return BodyType.Average;
+			}
+		}
+
+		private static RunStyle _getRunStyle(Player player, Strength strength)
+		{
+			// Run power bonuses based on run style
+			if (player.Body == BodyType.ExtraPounds ||
+				player.Body == BodyType.OverWeight)
+			{
+				return RunStyle.Upright;
+			}
+
+
+			if (player.Body == BodyType.SemiMuscular || 
+				player.Body == BodyType.VeryMuscular || 
+				player.Body == BodyType.Muscular)
+			{
+				var val = _rnd.Next(1, 5);
+
+				if (val != 2)
+				{
+					val = _rnd.Next(1, 5);
+				}
+
+				return (RunStyle)val;
+			}
+			else
+			{
+				return (RunStyle)_rnd.Next(1, 5);
+			}
 		}
 
 		private static double _getModHigh()
@@ -88,76 +165,97 @@ namespace DemeuseFootball15.Engine
 			return (double)mod;
 		}
 
-		private static PlayerAthleticism _generateAthleticism(PlayerPhysicalTraits traits, int mod)
+		private static PlayerAthleticism _generateAthleticism(Player player, Strength strength, double mod)
 		{
 			PlayerAthleticism athleticism = new PlayerAthleticism();
-			athleticism.Acceleration = _getModHigh();
-			athleticism.Agility = _getModHigh();
-			athleticism.BlockShedding = _getModLow();
-			athleticism.Carry = _getModLow();
-			athleticism.Catching = _getModLow();
-			athleticism.Elusiveness = _getModLow();
-			athleticism.FinessMove = _getModLow();
-			athleticism.HitPower = _getModLow();
-			athleticism.Injury = _getModLow();
-			athleticism.KickAccuracy = _getModLow();
-			athleticism.KickPower = _getModLow();
-			athleticism.ManCoverage = _getModLow();
-			athleticism.PassBlock = _getModLow();
-			athleticism.PlayAction = _getModLow();
-			athleticism.PowerMove = _getModLow();
-			athleticism.RunBlock = _getModLow();
-			athleticism.RunPower = _getModLow();
-			athleticism.Speed = _getModHigh();
-			athleticism.Stamina = _getModLow();
-			athleticism.Strength = _getModLow();
-			athleticism.Tackling = _getModLow();
-			athleticism.ThrowAccuracyDeep = _getModLow();
-			athleticism.ThrowAccuracyMid = _getModLow();
-			athleticism.ThrowAccuracyShort = _getModLow();
-			athleticism.ThrowOnTheRun = _getModLow();
-			athleticism.ThrowPower = _getModLow();
-			athleticism.ZoneCoverage = _getModLow();
+			athleticism.Strength = strength;								// Age
+
+			Speed speed = new Speed(player, strength);
+			speed.Randomize(_rnd, player.Age);
+			athleticism.Speed = speed;										// Depends on Height/Weight Ratio, can be upped by strength
+
+			Acceleration acceleration = new Acceleration(player, strength);
+			acceleration.Randomize(_rnd, player.Age);
+			athleticism.Acceleration = acceleration;						// Depends on Height/Weight Ratio, can be upped by strength
+
+			Jumping jumping = new Jumping(player, strength);
+			jumping.Randomize(_rnd, player.Age);
+			athleticism.Jumping = jumping;									// Depends on Height/Weight Ratio, can be upped by Leg Strength
+
+			Coordination coordination = new Coordination(player);
+			coordination.Randomize(_rnd, player.Age);
+			athleticism.Coordination = coordination;						// Height
+
+			Agility agility = new Agility(player);
+			agility.Randomize(_rnd, player.Age);
+			athleticism.Agility = agility;									// Depends on Height/Weight Ratio
+
+			athleticism.BlockShedding = _rnd.NextDouble(30, 70, 4, 60);		// Depends on Height/Weight Ratio/Strength
+			athleticism.Carry = _rnd.NextDouble(10, 60, 4, 50);				// Depends on Height/Weight Ratio/Hand Size/Coordination
+			athleticism.Catching = _rnd.NextDouble(10, 90, 6, 50);			// Hand Size/Coordination
+			athleticism.Elusiveness = _rnd.NextDouble(10, 80, 4, 60);		// Depends on Height/Weight Ratio
+			athleticism.FinessMove = _rnd.NextDouble(10, 80, 4, 60);		// Depends on Height/Weight Ratio/Arm Length
+			athleticism.HitPower = _getModLow();							// Depends on Height/Weight Ratio
+			athleticism.KickAccuracy = _getModLow();						// No dependence/Leg Strength/Coordination			
+			athleticism.KickPower = _getModLow();							// No dependence/Leg Strength/Coordination
+			athleticism.ManCoverage = _getModLow();							// No dependence/Coordination
+			athleticism.PassBlock = _getModLow();							// Depends on Height/Weight Ratio
+			athleticism.PowerMove = _getModLow();							// Depends on Height/Weight Ratio/Strength
+			athleticism.RunBlock = _getModLow();							// Depends on Height/Weight Ratio
+			athleticism.RunPower = _getModLow();							// Depends on Height/Weight Ratio
+			athleticism.Stamina = _getModLow();								// Depends on Height/Weight Ratio
+			athleticism.Tackling = _getModLow();							// No Dependence
+			athleticism.ThrowAccuracyDeep = _getModLow();					// Strength/Coordination
+			athleticism.ThrowAccuracyMid = _getModLow();					// Strength/Coordination
+			athleticism.ThrowAccuracyShort = _getModLow();					// Strength/Coordination
+			athleticism.ThrowOnTheRun = _getModLow();						// No Dependence/Coordination
+			athleticism.ThrowPower = _getModLow();							// Arm Strength
+			athleticism.ZoneCoverage = _getModLow();						// No Dependence/Coordination
+
+			athleticism.Tackling = _rnd.NextDouble(10, 90, 4, 60); 			// No Dependence
+			athleticism.PlayAction = _rnd.NextDouble(10, 70, 4, 60);		// No dependence
+			athleticism.Injury = _rnd.NextDouble(70, 100, 0, 0);			// No dependence
+			athleticism.Toughness = _rnd.NextDouble(35, 100, 3, 75);		// No dependence
 
 			return athleticism;
 		}
 
-		private static PlayerCharacter _generateCharacter(int mod)
+		private static PlayerCharacter _generateCharacter(double mod)
 		{
 			PlayerCharacter character = new PlayerCharacter();
-			character.Competitiveness = _getModHigh();
-			character.Confidence = _getModLow();
-			character.Disruptiveness = _getModLow();
-			character.Diva = _getModLow();
-			character.Humbleness = _getModHigh();
-			character.Influence = _getModHigh();
-			character.NegativeInfluenceBlock = _getModLow();
-			character.ShowBoat = _getModLow();
+			character.Competitiveness = _getModHigh() + mod; ;
+			character.Confidence = _getModHigh() + mod; ;
+			character.Disruptiveness = _getModLow() + mod; ;
+			character.Diva = _getModLow() + mod; ;
+			character.Humbleness = _getModHigh() + mod; ;
+			character.Influence = _getModHigh() + mod; ;
+			character.NegativeInfluenceBlock = _getModHigh();
+			character.ShowBoat = _getModLow() + mod; ;
 
 			return character;
 		}
 
-		private static PlayerDrive _generateDrive(int mod)
+		private static PlayerDrive _generateDrive(double mod)
 		{
 			PlayerDrive drive = new PlayerDrive();
-			drive.PersonalGoals = _getModHigh();
-			drive.TeamWork = _getModHigh();
-			drive.WorkEthic = _getModHigh();
+			drive.PersonalGoals = _getModHigh() + mod;
+			drive.TeamWork = _getModHigh() + mod;
+			drive.WorkEthic = _getModHigh() + mod;
 
 			return drive;
 		}
 
-		private static IEnumerable<PlayerGoal> _generateGoals(int mod)
+		private static IEnumerable<PlayerGoal> _generateGoals(double mod)
 		{
 			return null;
 		}
 
-		private static IEnumerable<PlayerInfluence> _generateInfluences(int mod)
+		private static IEnumerable<PlayerInfluence> _generateInfluences(double mod)
 		{
 			return null;
 		}
 
-		private static PlayerPhysicalTraits _generatePhysicalTraits(int mod, Player player)
+		private static PlayerPhysicalTraits _generatePhysicalTraits(Player player)
 		{
 			PlayerPhysicalTraits traits = new PlayerPhysicalTraits();
 
@@ -184,23 +282,23 @@ namespace DemeuseFootball15.Engine
 			return traits;
 		}
 
-		private static PlayerTalent _generateTalent(int mod)
+		private static PlayerTalent _generateTalent(double mod)
 		{
 			PlayerTalent talent = new PlayerTalent();
-			talent.Awareness = _getModHigh();
-			talent.BaseKnowledge = _getModHigh();
-			talent.Intangibles = _getModHigh();
-			talent.LearningAbility = _getModHigh();
-			talent.PlayBook = _getModHigh();
-			talent.PlayReading = _getModHigh();
-			talent.Release = _getModHigh();
-			talent.RouteRunning = _getModHigh();
-			talent.UnderPressure = _getModHigh();
+			talent.Awareness = _getModLow() + mod;
+			talent.BaseKnowledge = _getModHigh() + mod;
+			talent.Intangibles = _getModHigh() + mod;
+			talent.LearningAbility = _getModHigh() + mod;
+			talent.PlayBook = 0d;
+			talent.PlayReading = _getModLow() + mod;
+			talent.Release = _getModLow() + mod;
+			talent.RouteRunning = _getModLow() + mod;
+			talent.UnderPressure = _getModLow() + mod;
 
 			return talent;
 		}
 
-		private static bool _addSpecialModifier()
+		private static double _addSpecialModifier()
 		{
 			var mod = _getNextInt();
 
@@ -208,12 +306,29 @@ namespace DemeuseFootball15.Engine
 			{
 				if (mod < SPECIAL_MOD_CONST)
 				{
-					return false;
+					return 0;
 				}
 				mod = _getNextInt();
 			}
 
-			return true;
+			return 6;
+		}
+	}
+
+	static class Extension
+	{
+		public static double NextDouble(this Random random, int min, int max, int maxCount, double threshhold)
+		{
+			var result = Convert.ToDouble(random.Next(min, max));
+			var counter = 0;
+
+			while (result >= threshhold && counter < maxCount)
+			{
+				counter++;
+				result = Convert.ToDouble(random.Next(min, max));
+			}
+
+			return result;
 		}
 	}
 }

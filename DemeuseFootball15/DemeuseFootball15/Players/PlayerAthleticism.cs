@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DemeuseFootball15.Traits;
 
 namespace DemeuseFootball15.Players
 {
 	public class PlayerAthleticism
 	{
-		public double Speed { get; set; }
-		public double Strength { get; set; }
-		public double Acceleration { get; set; }
-		public double Agility { get; set; }
+		public Speed Speed { get; set; }
+		public Strength Strength { get; set; }
+		public Acceleration Acceleration { get; set; }
+		public Agility Agility { get; set; }
 		public double Injury { get; set; }
 		public double Catching { get; set; }
 		public double Carry { get; set; }
@@ -35,5 +36,8 @@ namespace DemeuseFootball15.Players
 		public double ZoneCoverage { get; set; }
 		public double KickPower { get; set; }
 		public double KickAccuracy { get; set; }
+		public double Toughness { get; set; }
+		public Coordination Coordination { get; set; }
+		public Jumping Jumping { get; set; }
 	}
 }

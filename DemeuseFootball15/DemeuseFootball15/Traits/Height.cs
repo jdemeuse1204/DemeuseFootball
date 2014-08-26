@@ -12,11 +12,11 @@ namespace DemeuseFootball15.Traits
 
 		protected override int _maxPossibilityCount { get { return 6; } }
 
-		protected override int _high { get { return _avg + 4; } }
+		protected override int _high { get { return Average + 4; } }
 
-		protected override int _low { get { return _avg - 4; } }
+		protected override int _low { get { return Average - 4; } }
 
-		protected override int _avg { get { return 66; } }
+		public override int Average { get { return 66; } }
 
 		public override int Min { get { return 54; } }
 	}

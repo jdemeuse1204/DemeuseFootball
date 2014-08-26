@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using DemeuseFootball15.Engine;
+using DemeuseFootball15.Players;
 
 namespace DemeuseFootball15
 {
@@ -25,11 +26,16 @@ namespace DemeuseFootball15
 		{
 			InitializeComponent();
 
+			var count = 0;
+			var players = new List<Player>();
 			var player = PlayerGenerator.Generate();
+			players.Add(player);
 
-			if (player != null)
+			while (count < 100)
 			{
-
+				player = PlayerGenerator.Generate();
+				players.Add(player);
+				count++;
 			}
 		}
 	}

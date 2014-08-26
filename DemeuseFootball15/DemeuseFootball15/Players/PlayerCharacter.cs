@@ -16,5 +16,6 @@ namespace DemeuseFootball15.Players
 		public double Competitiveness { get; set; }
 		public double Humbleness { get; set; }
 		public double NegativeInfluenceBlock { get; set; }
+		public double LoveForTheGame { get; set; }
 	}
 }

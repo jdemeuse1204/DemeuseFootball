@@ -6,12 +6,15 @@ using System.Threading.Tasks;
 
 namespace DemeuseFootball15.Enumeration
 {
-	public enum RunStyle
+	public enum BodyType
 	{
-		LongStride = 1,
-		Sprinter,
-		Upright,
-		LowCenter,
-		Natural
+		Muscular = 1,
+		Average,
+		Scrawny,
+		SemiMuscular,
+		VeryMuscular,
+		TopHeavy,
+		ExtraPounds,
+		OverWeight
 	}
 }

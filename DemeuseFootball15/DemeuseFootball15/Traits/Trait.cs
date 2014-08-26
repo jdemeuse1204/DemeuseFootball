@@ -22,6 +22,6 @@ namespace DemeuseFootball15.Traits
 
 		protected abstract int _low { get; }
 
-		protected abstract int _avg { get; }
+		public abstract int Average { get; }
 	}
 }

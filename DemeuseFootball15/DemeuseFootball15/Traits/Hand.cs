@@ -13,11 +13,11 @@ namespace DemeuseFootball15.Traits
 
 		protected override int _maxPossibilityCount { get { return 6; } }
 
-		protected override int _high { get { return _avg + _defaultDelta; } }
+		protected override int _high { get { return Average + _defaultDelta; } }
 
-		protected override int _low { get { return _avg - _defaultDelta; } }
+		protected override int _low { get { return Average - _defaultDelta; } }
 
-		protected override int _avg { get { return _defaultAverage; } }
+		public override int Average { get { return _defaultAverage; } }
 
 		public override int Min { get { return _defaultMin; } }
 
@@ -37,7 +37,7 @@ namespace DemeuseFootball15.Traits
 		private void _getGetDefaults()
 		{
 			XmlDocument doc = new XmlDocument();
-			doc.Load(@"C:\Development\VS2012\DemeuseFootball15\DemeuseFootball15\HeightToHandRatio.xml");
+			doc.Load(@"..\..\HeightToHandRatio.xml");
 
 			XmlNodeList elemList = doc.GetElementsByTagName("ratio");
 			for (int i = 0; i < elemList.Count; i++)

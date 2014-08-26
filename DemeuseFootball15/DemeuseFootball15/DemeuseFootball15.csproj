@@ -62,6 +62,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Engine\PlayerGenerator.cs" />
+    <Compile Include="Enumeration\BodyType.cs" />
     <Compile Include="Enumeration\GoalType.cs" />
     <Compile Include="Enumeration\HighSchoolGoal.cs" />
     <Compile Include="Enumeration\Goal.cs" />
@@ -75,12 +76,18 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Traits\Acceleration.cs" />
+    <Compile Include="Traits\Agility.cs" />
     <Compile Include="Traits\ArmLength.cs" />
+    <Compile Include="Traits\Coordination.cs" />
     <Compile Include="Traits\Foot.cs" />
     <Compile Include="Traits\Hand.cs" />
     <Compile Include="Traits\Height.cs" />
+    <Compile Include="Traits\Jumping.cs" />
     <Compile Include="Traits\RandomizeDependencyTrait.cs" />
     <Compile Include="Traits\RandomizeTrait.cs" />
+    <Compile Include="Traits\Speed.cs" />
+    <Compile Include="Traits\Strength.cs" />
     <Compile Include="Traits\Trait.cs" />
     <Compile Include="Traits\Weight.cs" />
     <Compile Include="Players\Player.cs" />
@@ -129,6 +136,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="HeightToHandRatio.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="HeightWeightSpeedRatio.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

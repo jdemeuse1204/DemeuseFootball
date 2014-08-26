@@ -18,7 +18,9 @@ namespace DemeuseFootball15.Players
 		public IEnumerable<PlayerInfluence> Influences { get; set; }
 		public RunStyle RunningStyle { get; set; }
 		public ThrowStyle ThrowingStyle { get; set; }
+		public IEnumerable<PositionType> Positions { get; set; }
 
+		public BodyType Body { get; set; }
 		public int Age { get; set; }
 		public DateTime DateOfBirth { get; set; }
 		public string City { get; set; }
