@@ -61,7 +61,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Engine\PlayerGenerator.cs" />
     <Compile Include="Enumeration\BodyType.cs" />
     <Compile Include="Enumeration\GoalType.cs" />
     <Compile Include="Enumeration\HighSchoolGoal.cs" />
@@ -76,28 +75,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Traits\Acceleration.cs" />
-    <Compile Include="Traits\Agility.cs" />
-    <Compile Include="Traits\ArmLength.cs" />
-    <Compile Include="Traits\Coordination.cs" />
-    <Compile Include="Traits\Foot.cs" />
-    <Compile Include="Traits\Hand.cs" />
-    <Compile Include="Traits\Height.cs" />
-    <Compile Include="Traits\Jumping.cs" />
-    <Compile Include="Traits\RandomizeDependencyTrait.cs" />
-    <Compile Include="Traits\RandomizeTrait.cs" />
-    <Compile Include="Traits\Speed.cs" />
-    <Compile Include="Traits\Strength.cs" />
-    <Compile Include="Traits\Trait.cs" />
-    <Compile Include="Traits\Weight.cs" />
+    <Compile Include="Players\RandomPlayer.cs" />
     <Compile Include="Players\Player.cs" />
-    <Compile Include="Players\PlayerAthleticism.cs" />
-    <Compile Include="Players\PlayerCharacter.cs" />
-    <Compile Include="Players\PlayerDrive.cs" />
     <Compile Include="Players\PlayerGoal.cs" />
     <Compile Include="Players\PlayerInfluence.cs" />
-    <Compile Include="Players\PlayerPhysicalTraits.cs" />
-    <Compile Include="Players\PlayerTalent.cs" />
     <Compile Include="Players\PlayerPositionType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -124,21 +105,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="HeightWeightRatio.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="HeightToArmLengthRatio.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="HeightToFootRatio.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="HeightToHandRatio.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="HeightWeightSpeedRatio.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
