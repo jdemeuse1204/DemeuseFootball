@@ -69,12 +69,14 @@
     <Compile Include="Enumeration\PositionType.cs" />
     <Compile Include="Enumeration\RunStyle.cs" />
     <Compile Include="Enumeration\ThrowStyle.cs" />
+    <Compile Include="Extension.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Players\GrowthPlayer.cs" />
     <Compile Include="Players\RandomPlayer.cs" />
     <Compile Include="Players\Player.cs" />
     <Compile Include="Players\PlayerGoal.cs" />

@@ -8,8 +8,8 @@ namespace DemeuseFootball15.Enumeration
 {
 	public enum Goal
 	{
-		BestAtPosition,
-		BestAtPositionEver,
+		BestAtPosition = 1,
+		BestAtPositionInHistory,
 		MakeProBowl,
 		WinASuperBowl,
 		WinMostSuperBowlsInHistory,
@@ -17,12 +17,15 @@ namespace DemeuseFootball15.Enumeration
 		BecomeALegend,
 		CouchPotato,
 		JustGetBy,
-		BeLikeIdol,
+		BeLikeIdol = 10,
 		GetHugeEndorsements,
 		Fame,
 		FamilyMan,
 		ThereIsLifeAfterFootball,
 		GraduateHighSchool,
-		GraduateCollege
+		GraduateCollege,
+		WorldClassSprinter,
+		Olympian,
+		AveragePlayer // 19
 	}
 }

@@ -10,15 +10,33 @@ namespace DemeuseFootball15.Players
 	public class Player
 	{
 		#region General
-		public IEnumerable<PlayerGoal> Goals { get; protected set; }
-		public IEnumerable<PlayerInfluence> Influences { get; protected set; }
+		public IEnumerable<PlayerGoal> Goals { get { return _goals; } }
+		public IEnumerable<PlayerInfluence> HighSchoolInfluences { get; protected set; }
+		public IEnumerable<PlayerInfluence> CollegiateInfluences { get; protected set; }
+		public IEnumerable<PlayerInfluence> ProInfluences { get; protected set; }
+		protected List<PlayerGoal> _goals { get; set; }
+		protected List<PlayerInfluence> _highSchoolInfluences { get; set; }
+		protected List<PlayerInfluence> _collegiateInfluences { get; set; }
+		protected List<PlayerInfluence> _proInfluences { get; set; }
+
 		public RunStyle RunningStyle { get; protected set; }
 		public ThrowStyle ThrowingStyle { get; protected set; }
 		public IEnumerable<PositionType> DesiredPositionsTypes { get; protected set; }
 		public PositionType CurrentPositionType { get; protected set; }
 		public BodyType Body { get; protected set; }
-		public TimeSpan Age { get { return DateOfBirth - DateTime.Now; } }
 		public DateTime DateOfBirth { get; protected set; }
+		public int Age
+		{
+			get
+			{
+				int age = DateTime.Now.Year - DateOfBirth.Year;
+				if (DateTime.Now.Month < DateOfBirth.Month || (DateTime.Now.Month == DateOfBirth.Month && DateTime.Now.Day < DateOfBirth.Day))
+				{
+					age--;
+				}
+				return age;
+			}
+		}
 		public string City { get; protected set; }
 		public string State { get; protected set; }
 		public string FirstName { get; protected set; }
@@ -30,7 +48,6 @@ namespace DemeuseFootball15.Players
 		public double Height { get; protected set; }
 		public double Weight { get; protected set; }
 		public double ArmLength { get; protected set; }
-		public double WingSpan { get; protected set; }
 		public double Hand { get; protected set; }
 		public double Foot { get; protected set; }
 		public double GrowthLeft { get; protected set; }
@@ -74,6 +91,7 @@ namespace DemeuseFootball15.Players
 		public double WorkEthic { get; protected set; }
 		public double TeamWork { get; protected set; }
 		public double PersonalGoals { get; protected set; }
+		public double Motivation { get; protected set; }
 		#endregion
 
 		#region Talent 

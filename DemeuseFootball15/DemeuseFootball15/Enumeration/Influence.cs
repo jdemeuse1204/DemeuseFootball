@@ -16,6 +16,7 @@ namespace DemeuseFootball15.Enumeration
 		OtherPlayers,
 		Team,
 		Rivalries,
-		Fans
+		Fans,
+		Idol
 	}
 }
