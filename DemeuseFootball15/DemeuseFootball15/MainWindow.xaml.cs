@@ -27,7 +27,16 @@ namespace DemeuseFootball15
 
 			var players = new List<Player>();
 			var player = new RandomPlayer();
-			players.Add(player);
+			var count = 0;
+
+			while (count < 100)
+			{
+				player = new RandomPlayer();
+				Console.WriteLine("Weight : " + player.Weight);
+				Console.WriteLine("Height : " + player.Height);
+				players.Add(player);
+				count++;
+			}
 		}
 	}
 }

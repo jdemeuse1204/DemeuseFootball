@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TestSimpleRNG;
 
 namespace DemeuseFootball15
 {
-	public static class Extension
+	public class Services
 	{
-		public static double NextDouble(this Random random, int minValue, int maxValue, int numberOfTimesUnderMin, int numberOfTimesOverMax, double minThreshhold, double maxThreshhold)
+		public static double NextDouble(double mean, double standardDeviation, int numberOfTimesUnderMin, int numberOfTimesOverMax, double minThreshhold, double maxThreshhold)
 		{
 			var overCount = 0;
 			var underCount = 0;
@@ -21,7 +22,7 @@ namespace DemeuseFootball15
 			while (count < 10 && underCount < numberOfTimesUnderMin && overCount < numberOfTimesOverMax)
 			{
 				count++;
-				var num = Convert.ToDouble(random.Next(minValue, maxValue));
+				var num = Math.Round(SimpleRNG.GetNormal(mean, standardDeviation),2);
 
 				if (num >= maxThreshhold)
 				{
@@ -52,6 +53,17 @@ namespace DemeuseFootball15
 			{
 				return Math.Round(normalSum / normalCount, 2);
 			}
+		}
+
+		public static int Next(int minValue, int maxValue)
+		{
+			Random rnd = new Random();
+			return rnd.Next(minValue, maxValue);
+		}
+
+		public static double Next(double mean, double standardDeviation)
+		{
+			return Math.Round(SimpleRNG.GetNormal(mean, standardDeviation), 2);
 		}
 	}
 }

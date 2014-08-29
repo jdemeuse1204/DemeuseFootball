@@ -44,6 +44,7 @@ namespace DemeuseFootball15.Players
 		public int EducationLevel { get; protected set; }
 		#endregion
 
+		// Done
 		#region Physical Traits
 		public double Height { get; protected set; }
 		public double Weight { get; protected set; }
@@ -87,7 +88,8 @@ namespace DemeuseFootball15.Players
 		public double Jumping { get; protected set; }
 		#endregion
 
-		#region Drive
+		// Done
+		#region Drive 
 		public double WorkEthic { get; protected set; }
 		public double TeamWork { get; protected set; }
 		public double PersonalGoals { get; protected set; }

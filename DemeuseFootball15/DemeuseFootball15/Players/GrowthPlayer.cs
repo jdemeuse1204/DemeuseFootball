@@ -11,82 +11,87 @@ namespace DemeuseFootball15.Players
 	/// </summary>
 	public class GrowthPlayer : Player
 	{
-		private Random _rnd { get; set; }
-
 		public GrowthPlayer()
 		{
-			_rnd = new Random();
-
-			this.Foot = _getFootSize(Height);
-			this.Hand = _getHandSize(Height);
+			this.Foot = _getFootSize();
+			this.Hand = _getHandSize();
+			this.ArmLength = _getArmLength();
 		}
 
-		protected double _getFootSize(double height)
+		public GrowthPlayer(Player player)
 		{
-			if (height < 66)
+			this.Height = player.Height;
+			this.Foot = _getFootSize();
+			this.Hand = _getHandSize();
+			this.ArmLength = _getArmLength();
+		}
+
+		protected double _getFootSize()
+		{
+			if (this.Height < 66)
 			{
 				// < 5'6"
-				return _rnd.NextDouble(7, 9, 6, 1, 7, 9);
+				return Services.NextDouble(7, 2, 6, 1, 7, 9);
 			}
-			else if (height > 66 && height <= 72)
+			else if (this.Height > 66 && this.Height <= 72)
 			{
 				// 5'6" - 6'
-				return _rnd.NextDouble(8, 12, 2, 2, 8, 11);
+				return Services.NextDouble(8, 4, 2, 2, 8, 11);
 			}
-			else if (height > 72 && height <= 75)
+			else if (this.Height > 72 && this.Height <= 75)
 			{
 				//  6' - 6'3"
-				return _rnd.NextDouble(11, 15, 2, 2, 11, 13);
+				return Services.NextDouble(11, 4, 2, 2, 11, 13);
 			}
 			else
 			{
-				return _rnd.NextDouble(14, 17, 2, 2, 14, 16);
+				return Services.NextDouble(14, 3, 2, 2, 14, 16);
 			}
 		}
 
-		protected double _getHandSize(double height)
+		protected double _getHandSize()
 		{
-			if (height < 66)
+			if (this.Height < 66)
 			{
 				// < 5'6"
-				return _rnd.NextDouble(4, 5, 5, 1, 4, 5);
+				return Services.NextDouble(5, 1, 5, 1, 4, 5);
 			}
-			else if (height > 66 && height <= 72)
+			else if (this.Height > 66 && this.Height <= 72)
 			{
 				// 5'6" - 6'
-				return _rnd.NextDouble(5, 7, 5, 1, 5, 7);
+				return Services.NextDouble(5,1, 5, 1, 5, 7);
 			}
-			else if (height > 72 && height <= 75)
+			else if (this.Height > 72 && this.Height <= 75)
 			{
 				//  6' - 6'3"
-				return _rnd.NextDouble(8, 10, 5, 2, 8, 10);
+				return Services.NextDouble(7, 2, 5, 2, 7, 9);
 			}
 			else
 			{
-				return _rnd.NextDouble(9, 11, 5, 2, 9, 12);
+				return Services.NextDouble(9, 2, 5, 2, 8, 10);
 			}
 		}
 
-		protected double _getArmLength(double height)
+		protected double _getArmLength()
 		{
-			if (height < 66)
+			if (this.Height < 66)
 			{
 				// < 5'6"
-				return _rnd.NextDouble(26, 28, 5, 1, 26, 27);
+				return Services.NextDouble(26, 2, 5, 1, 26, 27);
 			}
-			else if (height > 66 && height <= 72)
+			else if (this.Height > 66 && this.Height <= 72)
 			{
 				// 5'6" - 6'
-				return _rnd.NextDouble(29, 31, 5, 1, 29, 30);
+				return Services.NextDouble(29, 2, 5, 1, 28, 30);
 			}
-			else if (height > 72 && height <= 75)
+			else if (this.Height > 72 && this.Height <= 75)
 			{
 				//  6' - 6'3"
-				return _rnd.NextDouble(32, 33, 5, 2, 32, 33);
+				return Services.NextDouble(32, 1, 5, 2, 31, 33);
 			}
 			else
 			{
-				return _rnd.NextDouble(33, 35, 5, 2, 33, 34);
+				return Services.NextDouble(33, 2, 5, 2, 31, 34);
 			}
 		}
 	}

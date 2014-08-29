@@ -7,16 +7,14 @@ using DemeuseFootball15.Enumeration;
 
 namespace DemeuseFootball15.Players
 {
-	public class RandomPlayer : GrowthPlayer
+	public class RandomPlayer : Player
 	{
-		private Random _rnd { get; set; }
 		/// <summary>
 		/// Randomizes player stats
 		/// </summary>
 		public RandomPlayer()
 			: base()
 		{
-			_rnd = new Random();
 			// Get Random player
 
 			// All players start at 10-11 years old
@@ -40,17 +38,17 @@ namespace DemeuseFootball15.Players
 
 			// General
 			// Age
-			var age = _rnd.Next(10, 12);
+			var age = Services.Next(10, 12);
 
 			while (age >= 12)
 			{
-				age = _rnd.Next(10, 12);
+				age = Services.Next(10, 12);
 			}
 
 			// Date of Birth
 			var yearDate = new DateTime(DateTime.Now.Year - age, DateTime.Now.Month, DateTime.Now.Day).AddYears(-1);
 			var days = DateTime.IsLeapYear(yearDate.Year + 1) ? 365 : 364;
-			var findBday = _rnd.Next(0, days);
+			var findBday = Services.Next(0, days);
 			DateTime min = yearDate;
 			DateTime max = yearDate.AddDays(days);
 
@@ -59,31 +57,34 @@ namespace DemeuseFootball15.Players
 			// Physical Traits
 			if (this.Age == 10)
 			{
-				this.Height = _rnd.NextDouble(45, 64, 3, 6, 57, 50);
-				this.Weight = _rnd.NextDouble(62, 100, 6, 6, 65, 80);
+				this.Height = Services.NextDouble(54.5, 10, 3, 3, 48, 62);
 			}
 			else
 			{
-				this.Height = _rnd.NextDouble(47, 66, 6, 4, 59, 52);
-				this.Weight = _rnd.NextDouble(70, 108, 6, 6, 73, 88);
+				this.Height = Services.NextDouble(56.5, 10, 3, 3, 50, 64);
 			}
 
-			this.Metabolism = _rnd.NextDouble(30, 100, 4, 2, 75, 60);
+			this.Metabolism = Services.NextDouble(70, 30, 4, 2, 40, 70);
+
+			this.Weight = _getPlayerWeight(Height, Metabolism);
 
 			// As player grows physically these stats will get bigger
 			this.GrowthLeft = _getGrowthLeft(Height);
-			this.Foot = _getFootSize(Height);
-			this.Hand = _getHandSize(Height);
-			this.ArmLength = _getArmLength(Height);
+
+			var growth = new GrowthPlayer(this);
+			this.Foot = growth.Foot;
+			this.Hand = growth.Hand;
+			this.ArmLength = growth.ArmLength;
+
 			this.Body = BodyType.Average;
 			this.RunningStyle = RunStyle.Natural;
 
 			// Player Drive
-			this.Motivation = _rnd.NextDouble(30, 100, 4, 4, 40, 60);
-			this.PersonalGoals = _rnd.NextDouble(30, 100, 4, 4, 40, 60);
+			this.Motivation = Services.NextDouble(30, 100, 4, 4, 40, 60);
+			this.PersonalGoals = Services.NextDouble(30, 100, 4, 4, 40, 60);
 
 			var goalsToSkip = new List<Goal>();
-			var totalGoals = _getExtraTotalGoalsFromMotivation(Motivation, out goalsToSkip);			
+			var totalGoals = _getExtraTotalGoalsFromMotivation(Motivation, out goalsToSkip);
 
 			if (this.PersonalGoals < 40)
 			{
@@ -108,7 +109,7 @@ namespace DemeuseFootball15.Players
 			}
 			else if (this.PersonalGoals > 80 && this.PersonalGoals <= 100)
 			{
-				totalGoals += _rnd.Next(4, 6);
+				totalGoals += Services.Next(4, 6);
 
 				// Skip these goals
 				goalsToSkip.Add(Goal.CouchPotato);
@@ -120,46 +121,95 @@ namespace DemeuseFootball15.Players
 			this._goals = _getGoals(totalGoals, goalsToSkip);
 
 			// Team Work
-			this.TeamWork = _rnd.NextDouble(30, 100, 4, 4, 40, 60);
+			this.TeamWork = Services.NextDouble(30, 100, 4, 4, 40, 60);
 
 			// Work Ethic
 			if (this.Motivation < 40)
 			{
-				this.WorkEthic = _rnd.NextDouble(30, 60, 4, 4, 35, 55);
+				this.WorkEthic = Services.NextDouble(30, 60, 4, 4, 35, 55);
 			}
 			else if (this.Motivation > 40 && this.Motivation <= 60)
 			{
-				this.WorkEthic = _rnd.NextDouble(50, 70, 4, 4, 55, 65);
+				this.WorkEthic = Services.NextDouble(50, 70, 4, 4, 55, 65);
 			}
 			else if (this.Motivation > 60 && this.Motivation <= 80)
 			{
-				this.WorkEthic = _rnd.NextDouble(60, 80, 4, 4, 65, 75);
+				this.WorkEthic = Services.NextDouble(60, 80, 4, 4, 65, 75);
 			}
 			else if (this.Motivation > 80 && this.Motivation <= 100)
 			{
-				this.WorkEthic = _rnd.NextDouble(80, 100, 3, 3, 85, 95);
+				this.WorkEthic = Services.NextDouble(80, 100, 3, 3, 85, 95);
 			}
+		}
+
+		private double _getPlayerWeight(double height, double metabolism)
+		{
+			var mean = 0;
+			var stdDev = 0;
+			var minThreshhold = 0d;
+			var maxThreshhold = 0d;
+
+			if (metabolism < 40)
+			{
+				mean = 85;
+				stdDev = 15;
+				minThreshhold = 90;
+				maxThreshhold = 95;
+			}
+			else if (metabolism > 40 && metabolism <= 60)
+			{
+				mean = 80;
+				stdDev = 15;
+				minThreshhold = 82;
+				maxThreshhold = 92;
+			}
+			else if (metabolism > 60 && metabolism <= 80)
+			{
+				mean = 70;
+				stdDev = 20;
+				minThreshhold = 72;
+				maxThreshhold = 88;
+			}
+			else if (metabolism > 80 && metabolism <= 100)
+			{
+				mean = 62;
+				stdDev = 18;
+				minThreshhold = 64;
+				maxThreshhold = 78;
+			}
+
+			if (Age == 11)
+			{
+				mean += 8;
+				stdDev += 8;
+				minThreshhold += 8;
+				maxThreshhold += 8;
+			}
+
+			// TODO Adjust for height
+
+			return Services.NextDouble(mean, stdDev, 6, 6, minThreshhold, maxThreshhold);
 		}
 
 		private double _getGrowthLeft(double height)
 		{
 			if (height < 48)
 			{
-				return _rnd.NextDouble(18, 20, 6, 1, 18, 19);
+				return Services.NextDouble(18, 2, 6, 1, 18, 19);
 			}
 			else if (height > 48 && height <= 54)
 			{
 				// 5'6" - 6'
-				return _rnd.NextDouble(17, 20, 2, 2, 18, 19);
+				return Services.NextDouble(17, 3, 2, 2, 18, 19);
 			}
 			else if (height > 54 && height <= 60)
 			{
 				//  6' - 6'3"
-				return _rnd.NextDouble(14, 16, 6, 2, 14, 16);
+				return Services.NextDouble(14, 2, 6, 2, 14, 16);
 			}
 			else
 			{
-				return _rnd.NextDouble(10, 13, 6, 2, 10, 12);
+				return Services.NextDouble(10, 3, 6, 2, 10, 12);
 			}
 		}
 
@@ -199,12 +249,12 @@ namespace DemeuseFootball15.Players
 
 			for (int i = 1; i < totalGoals + 1; i++)
 			{
-				var rnd = _rnd.Next(1, 19);
+				var rnd = Services.Next(1, 19);
 				var goal = (Goal)rnd;
 
 				while (goals.Select(w => w.Goal).Contains(goal) || goalsToSkip.Contains(goal))
 				{
-					rnd = _rnd.Next(1, 19);
+					rnd = Services.Next(1, 19);
 					goal = (Goal)rnd;
 				}
 
