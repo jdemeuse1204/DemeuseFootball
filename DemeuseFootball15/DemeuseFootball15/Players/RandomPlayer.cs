@@ -57,11 +57,11 @@ namespace DemeuseFootball15.Players
 			// Physical Traits
 			if (this.Age == 10)
 			{
-				this.Height = Services.NextDouble(54.5, 10, 3, 3, 48, 62);
+				this.Height = Services.NextDouble(54.5, 5, 3, 3, 48, 62);
 			}
 			else
 			{
-				this.Height = Services.NextDouble(56.5, 10, 3, 3, 50, 64);
+				this.Height = Services.NextDouble(56.5, 8, 3, 3, 50, 64);
 			}
 
 			this.Metabolism = Services.NextDouble(70, 30, 4, 2, 40, 70);
@@ -80,8 +80,8 @@ namespace DemeuseFootball15.Players
 			this.RunningStyle = RunStyle.Natural;
 
 			// Player Drive
-			this.Motivation = Services.NextDouble(30, 100, 4, 4, 40, 60);
-			this.PersonalGoals = Services.NextDouble(30, 100, 4, 4, 40, 60);
+			this.Motivation = Services.NextDouble(70, 30, 4, 4, 40, 60);
+			this.PersonalGoals = Services.NextDouble(70, 30, 4, 4, 40, 60);
 
 			var goalsToSkip = new List<Goal>();
 			var totalGoals = _getExtraTotalGoalsFromMotivation(Motivation, out goalsToSkip);
@@ -121,24 +121,24 @@ namespace DemeuseFootball15.Players
 			this._goals = _getGoals(totalGoals, goalsToSkip);
 
 			// Team Work
-			this.TeamWork = Services.NextDouble(30, 100, 4, 4, 40, 60);
+			this.TeamWork = Services.NextDouble(60, 40, 4, 4, 40, 60);
 
 			// Work Ethic
 			if (this.Motivation < 40)
 			{
-				this.WorkEthic = Services.NextDouble(30, 60, 4, 4, 35, 55);
+				this.WorkEthic = Services.NextDouble(60, 60, 4, 4, 35, 55);
 			}
 			else if (this.Motivation > 40 && this.Motivation <= 60)
 			{
-				this.WorkEthic = Services.NextDouble(50, 70, 4, 4, 55, 65);
+				this.WorkEthic = Services.NextDouble(60, 40, 4, 4, 55, 65);
 			}
 			else if (this.Motivation > 60 && this.Motivation <= 80)
 			{
-				this.WorkEthic = Services.NextDouble(60, 80, 4, 4, 65, 75);
+				this.WorkEthic = Services.NextDouble(60, 20, 4, 4, 65, 75);
 			}
 			else if (this.Motivation > 80 && this.Motivation <= 100)
 			{
-				this.WorkEthic = Services.NextDouble(80, 100, 3, 3, 85, 95);
+				this.WorkEthic = Services.NextDouble(80, 10, 3, 3, 85, 95);
 			}
 		}
 
@@ -188,6 +188,35 @@ namespace DemeuseFootball15.Players
 
 			// TODO Adjust for height
 
+			if (this.Height > 50 && this.Height <= 55)
+			{
+				mean += 8;
+				stdDev += 8;
+				minThreshhold += 8;
+				maxThreshhold += 8;
+			}
+			else if (this.Height > 55 && this.Height <= 60)
+			{
+				mean += 12;
+				stdDev += 12;
+				minThreshhold += 12;
+				maxThreshhold += 12;
+			}
+			else if (this.Height > 60 && this.Height <= 65)
+			{
+				mean += 16;
+				stdDev += 16;
+				minThreshhold += 12;
+				maxThreshhold += 12;
+			}
+			else if (this.Height > 65)
+			{
+				mean += 22;
+				stdDev += 22;
+				minThreshhold += 16;
+				maxThreshhold += 16;
+			}
+
 			return Services.NextDouble(mean, stdDev, 6, 6, minThreshhold, maxThreshhold);
 		}
 
@@ -207,9 +236,13 @@ namespace DemeuseFootball15.Players
 				//  6' - 6'3"
 				return Services.NextDouble(14, 2, 6, 2, 14, 16);
 			}
+			else if (height > 60 && height <= 65)
+			{
+				return Services.NextDouble(10, 2, 6, 2, 14, 16);
+			}
 			else
 			{
-				return Services.NextDouble(10, 3, 6, 2, 10, 12);
+				return Services.NextDouble(8, 2, 6, 2, 10, 12);
 			}
 		}
 

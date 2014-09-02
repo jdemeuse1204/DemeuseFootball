@@ -9,7 +9,7 @@ namespace DemeuseFootball15
 {
 	public class Services
 	{
-		public static double NextDouble(double mean, double standardDeviation, int numberOfTimesUnderMin, int numberOfTimesOverMax, double minThreshhold, double maxThreshhold)
+		public static double NextDouble(RndObject rnd)
 		{
 			var overCount = 0;
 			var underCount = 0;
@@ -19,17 +19,23 @@ namespace DemeuseFootball15
 			var normalSum = 0d;
 			var count = 0;
 
-			while (count < 10 && underCount < numberOfTimesUnderMin && overCount < numberOfTimesOverMax)
+			while (count < 10 && underCount < rnd.NumberOfTimesUnderMin && overCount < rnd.NumberOfTimesOverMax)
 			{
-				count++;
-				var num = Math.Round(SimpleRNG.GetNormal(mean, standardDeviation),2);
+				var num = Math.Round(SimpleRNG.GetNormal(rnd.Mean, rnd.StandardDeviation),2);
 
-				if (num >= maxThreshhold)
+				if (num >= 100 || num <= 0 || num >= rnd.MaxThrowAwayValue || num <= rnd.MinThrowAwayValue)
+				{
+					continue;
+				}
+
+				count++;
+
+				if (num >= rnd.MaxThreshhold)
 				{
 					overSum += num;
 					overCount++;
 				}
-				else if (num <= minThreshhold)
+				else if (num <= rnd.MinThreshhold)
 				{
 					underSum += num;
 					underCount++;
@@ -41,11 +47,11 @@ namespace DemeuseFootball15
 				}
 			}
 
-			if (underCount >= numberOfTimesUnderMin)
+			if (underCount >= rnd.NumberOfTimesUnderMin)
 			{
 				return Math.Round(underSum / underCount, 2);
 			}
-			else if (overCount >= numberOfTimesOverMax)
+			else if (overCount >= rnd.NumberOfTimesOverMax)
 			{
 				return Math.Round(overSum / overCount, 2);
 			}

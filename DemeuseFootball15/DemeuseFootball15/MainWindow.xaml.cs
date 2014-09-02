@@ -32,8 +32,10 @@ namespace DemeuseFootball15
 			while (count < 100)
 			{
 				player = new RandomPlayer();
+				Console.WriteLine("++++ Player " + count + " ++++");
 				Console.WriteLine("Weight : " + player.Weight);
 				Console.WriteLine("Height : " + player.Height);
+				Console.WriteLine("Max Height : " + (player.Height + player.GrowthLeft));
 				players.Add(player);
 				count++;
 			}
