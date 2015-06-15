@@ -1,0 +1,8 @@
+C:\Users\jdemeuse\Documents\GitHub\DemeuseFootball\DemeuseFootball15\DemeuseFootball15.Console\bin\Debug\DemeuseFootball15.Console.exe.config
+C:\Users\jdemeuse\Documents\GitHub\DemeuseFootball\DemeuseFootball15\DemeuseFootball15.Console\obj\Debug\DemeuseFootball15.Console.csprojResolveAssemblyReference.cache
+C:\Users\jdemeuse\Documents\GitHub\DemeuseFootball\DemeuseFootball15\DemeuseFootball15.Console\bin\Debug\DemeuseFootball15.Console.exe
+C:\Users\jdemeuse\Documents\GitHub\DemeuseFootball\DemeuseFootball15\DemeuseFootball15.Console\bin\Debug\DemeuseFootball15.Console.pdb
+C:\Users\jdemeuse\Documents\GitHub\DemeuseFootball\DemeuseFootball15\DemeuseFootball15.Console\bin\Debug\DemeuseFootball15.exe
+C:\Users\jdemeuse\Documents\GitHub\DemeuseFootball\DemeuseFootball15\DemeuseFootball15.Console\bin\Debug\DemeuseFootball15.pdb
+C:\Users\jdemeuse\Documents\GitHub\DemeuseFootball\DemeuseFootball15\DemeuseFootball15.Console\obj\Debug\DemeuseFootball15.Console.exe
+C:\Users\jdemeuse\Documents\GitHub\DemeuseFootball\DemeuseFootball15\DemeuseFootball15.Console\obj\Debug\DemeuseFootball15.Console.pdb

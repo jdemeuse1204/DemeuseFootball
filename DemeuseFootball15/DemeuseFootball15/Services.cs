@@ -1,14 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TestSimpleRNG;
 
 namespace DemeuseFootball15
 {
 	public class Services
 	{
+        public static double NextDouble(double one, double two, double three, double four, double five, double six)
+	    {
+	        return 0d;
+	    }
+
 		public static double NextDouble(RndObject rnd)
 		{
 			var overCount = 0;

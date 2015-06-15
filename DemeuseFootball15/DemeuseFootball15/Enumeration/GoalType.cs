@@ -8,7 +8,7 @@ namespace DemeuseFootball15.Enumeration
 {
 	public enum GoalType
 	{
-		Personal,
+		Personal = 1,
 		Pro,
 		Collegiate,
 		HighSchool

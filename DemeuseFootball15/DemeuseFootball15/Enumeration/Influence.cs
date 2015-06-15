@@ -8,7 +8,7 @@ namespace DemeuseFootball15.Enumeration
 {
 	public enum Influence
 	{
-		Coach,
+		Coach = 1,
 		Parents,
 		HomeLife,
 		SocialLife,

@@ -53,6 +53,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Attributes\Dice.cs" />
+    <Compile Include="Enumeration\BodyShapeType.cs" />
+    <Compile Include="Enumeration\PlayerEvasionType.cs" />
+    <Compile Include="Enumeration\Volatility.cs" />
+    <Compile Include="RandomProperty\Dice.cs" />
+    <Compile Include="RandomProperty\DiceShaker.cs" />
+    <Compile Include="RandomProperty\RandomDouble.cs" />
     <Compile Include="RndObject.cs" />
     <Compile Include="Services.cs" />
     <Compile Include="SimpleRNG.cs" />

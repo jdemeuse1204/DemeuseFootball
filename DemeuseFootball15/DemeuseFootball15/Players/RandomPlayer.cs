@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Reflection;
+using DemeuseFootball15.Attributes;
 using DemeuseFootball15.Enumeration;
+using DemeuseFootball15.RandomProperty;
 
 namespace DemeuseFootball15.Players
 {
@@ -12,8 +13,7 @@ namespace DemeuseFootball15.Players
 		/// <summary>
 		/// Randomizes player stats
 		/// </summary>
-		public RandomPlayer()
-			: base()
+        public RandomPlayer(DiceShaker shaker)
 		{
 			// Get Random player
 
@@ -49,8 +49,8 @@ namespace DemeuseFootball15.Players
 			var yearDate = new DateTime(DateTime.Now.Year - age, DateTime.Now.Month, DateTime.Now.Day).AddYears(-1);
 			var days = DateTime.IsLeapYear(yearDate.Year + 1) ? 365 : 364;
 			var findBday = Services.Next(0, days);
-			DateTime min = yearDate;
-			DateTime max = yearDate.AddDays(days);
+			var min = yearDate;
+			var max = yearDate.AddDays(days);
 
 			this.DateOfBirth = yearDate.AddDays(findBday);
 
@@ -64,82 +64,91 @@ namespace DemeuseFootball15.Players
 				this.Height = Services.NextDouble(56.5, 8, 3, 3, 50, 64);
 			}
 
-			this.Metabolism = Services.NextDouble(70, 30, 4, 2, 40, 70);
+		    var properties = this.GetType().GetProperties().Where(w => w.GetCustomAttribute<DiceAttribute>() != null);
 
-			this.Weight = _getPlayerWeight(Height, Metabolism);
+		    foreach (var property in properties)
+		    {
+		        var attr = property.GetCustomAttribute<DiceAttribute>();
 
-			// As player grows physically these stats will get bigger
-			this.GrowthLeft = _getGrowthLeft(Height);
+                property.SetValue(this, shaker.Roll(attr.Min, attr.Max));
+		    }
 
-			var growth = new GrowthPlayer(this);
-			this.Foot = growth.Foot;
-			this.Hand = growth.Hand;
-			this.ArmLength = growth.ArmLength;
+		    //this.Metabolism = Services.NextDouble(70, 30, 4, 2, 40, 70);
 
-			this.Body = BodyType.Average;
-			this.RunningStyle = RunStyle.Natural;
+		    //this.Weight = _getPlayerWeight(Height, Metabolism);
 
-			// Player Drive
-			this.Motivation = Services.NextDouble(70, 30, 4, 4, 40, 60);
-			this.PersonalGoals = Services.NextDouble(70, 30, 4, 4, 40, 60);
+		    //// As player grows physically these stats will get bigger
+		    //this.GrowthLeft = _getGrowthLeft(Height);
 
-			var goalsToSkip = new List<Goal>();
-			var totalGoals = _getExtraTotalGoalsFromMotivation(Motivation, out goalsToSkip);
+		    //var growth = new GrowthPlayer(this);
+		    //this.Foot = growth.Foot;
+		    //this.Hand = growth.Hand;
+		    //this.ArmLength = growth.ArmLength;
 
-			if (this.PersonalGoals < 40)
-			{
-				totalGoals += 1;
+		    //this.Body = BodyType.Average;
+		    //this.RunningStyle = RunStyle.Natural;
 
-				// Skip these goals
-				goalsToSkip.Add(Goal.BecomeALegend);
-				goalsToSkip.Add(Goal.BestAtPositionInHistory);
-				goalsToSkip.Add(Goal.WinMostSuperBowlsInHistory);
-			}
-			else if (this.PersonalGoals > 40 && this.PersonalGoals <= 60)
-			{
-				totalGoals += 2;
-			}
-			else if (this.PersonalGoals > 60 && this.PersonalGoals <= 80)
-			{
-				totalGoals += 3;
+		    //// Player Drive
+		    //this.Motivation = Services.NextDouble(70, 30, 4, 4, 40, 60);
+		    //this.PersonalGoals = Services.NextDouble(70, 30, 4, 4, 40, 60);
 
-				// Skip these goals
-				goalsToSkip.Add(Goal.CouchPotato);
-				goalsToSkip.Add(Goal.JustGetBy);
-			}
-			else if (this.PersonalGoals > 80 && this.PersonalGoals <= 100)
-			{
-				totalGoals += Services.Next(4, 6);
+		    //var goalsToSkip = new List<Goal>();
+		    //var totalGoals = _getExtraTotalGoalsFromMotivation(Motivation, out goalsToSkip);
 
-				// Skip these goals
-				goalsToSkip.Add(Goal.CouchPotato);
-				goalsToSkip.Add(Goal.JustGetBy);
-				goalsToSkip.Add(Goal.AveragePlayer);
-			}
+		    //if (this.PersonalGoals < 40)
+		    //{
+		    //    totalGoals += 1;
 
-			// Goals - Based on Drive
-			this._goals = _getGoals(totalGoals, goalsToSkip);
+		    //    // Skip these goals
+		    //    goalsToSkip.Add(Goal.BecomeALegend);
+		    //    goalsToSkip.Add(Goal.BestAtPositionInHistory);
+		    //    goalsToSkip.Add(Goal.WinMostSuperBowlsInHistory);
+		    //}
+		    //else if (this.PersonalGoals > 40 && this.PersonalGoals <= 60)
+		    //{
+		    //    totalGoals += 2;
+		    //}
+		    //else if (this.PersonalGoals > 60 && this.PersonalGoals <= 80)
+		    //{
+		    //    totalGoals += 3;
 
-			// Team Work
-			this.TeamWork = Services.NextDouble(60, 40, 4, 4, 40, 60);
+		    //    // Skip these goals
+		    //    goalsToSkip.Add(Goal.CouchPotato);
+		    //    goalsToSkip.Add(Goal.JustGetBy);
+		    //}
+		    //else if (this.PersonalGoals > 80 && this.PersonalGoals <= 100)
+		    //{
+		    //    totalGoals += Services.Next(4, 6);
 
-			// Work Ethic
-			if (this.Motivation < 40)
-			{
-				this.WorkEthic = Services.NextDouble(60, 60, 4, 4, 35, 55);
-			}
-			else if (this.Motivation > 40 && this.Motivation <= 60)
-			{
-				this.WorkEthic = Services.NextDouble(60, 40, 4, 4, 55, 65);
-			}
-			else if (this.Motivation > 60 && this.Motivation <= 80)
-			{
-				this.WorkEthic = Services.NextDouble(60, 20, 4, 4, 65, 75);
-			}
-			else if (this.Motivation > 80 && this.Motivation <= 100)
-			{
-				this.WorkEthic = Services.NextDouble(80, 10, 3, 3, 85, 95);
-			}
+		    //    // Skip these goals
+		    //    goalsToSkip.Add(Goal.CouchPotato);
+		    //    goalsToSkip.Add(Goal.JustGetBy);
+		    //    goalsToSkip.Add(Goal.AveragePlayer);
+		    //}
+
+		    //// Goals - Based on Drive
+		    //this._goals = _getGoals(totalGoals, goalsToSkip);
+
+		    //// Team Work
+		    //this.TeamWork = Services.NextDouble(60, 40, 4, 4, 40, 60);
+
+		    //// Work Ethic
+		    //if (this.Motivation < 40)
+		    //{
+		    //    this.WorkEthic = Services.NextDouble(60, 60, 4, 4, 35, 55);
+		    //}
+		    //else if (this.Motivation > 40 && this.Motivation <= 60)
+		    //{
+		    //    this.WorkEthic = Services.NextDouble(60, 40, 4, 4, 55, 65);
+		    //}
+		    //else if (this.Motivation > 60 && this.Motivation <= 80)
+		    //{
+		    //    this.WorkEthic = Services.NextDouble(60, 20, 4, 4, 65, 75);
+		    //}
+		    //else if (this.Motivation > 80 && this.Motivation <= 100)
+		    //{
+		    //    this.WorkEthic = Services.NextDouble(80, 10, 3, 3, 85, 95);
+		    //}
 		}
 
 		private double _getPlayerWeight(double height, double metabolism)
