@@ -1,31 +1,37 @@
 ﻿using System;
 using System.Security.Cryptography;
+using DemeuseFootball15.Attributes;
+using DemeuseFootball15.Enumeration;
 
 namespace DemeuseFootball15.RandomProperty
 {
-    public class Dice : RandomNumberGenerator
+    public class WholeDice : RandomNumberGenerator, IDice
     {
-        public readonly int MinValue;
+        public double MinValue { get; private set; }
 
-        public readonly int MaxValue;
+        public double MaxValue { get; private set; }
+
+        public double Volatility { get; private set; }
 
         private static RandomNumberGenerator randomNumberGenerator;
 
-        public Dice(int sides)
-            : this()
-        {
-            MinValue = 1;
-            MaxValue = ++sides;
-        }
-
-        public Dice(int min, int max)
+        public WholeDice(double min, double max, Volatility volatility)
             : this()
         {
             MinValue = min;
-            MaxValue = ++max;
+            MaxValue = max;
+            Volatility = (double)volatility;
         }
 
-        Dice()
+        public WholeDice(WholeDiceAttribute dice)
+            : this()
+        {
+            MinValue = dice.Min;
+            MaxValue = dice.Max;
+            Volatility = (double)dice.Volatility;
+        }
+
+        WholeDice()
         {
             randomNumberGenerator = Create();
         }
@@ -49,7 +55,7 @@ namespace DemeuseFootball15.RandomProperty
             return (double)BitConverter.ToUInt32(b, 0) / UInt32.MaxValue;
         }
 
-        public int Shake()
+        public double Shake()
         {
             var range = (long)(MaxValue - MinValue);
 

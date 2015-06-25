@@ -53,11 +53,34 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Attributes\Dice.cs" />
+    <Compile Include="Attributes\DecmalDice.cs" />
+    <Compile Include="Attributes\DiceAttribute.cs" />
+    <Compile Include="Attributes\WholeDice.cs" />
+    <Compile Include="Collection\OrderedStack.cs" />
     <Compile Include="Enumeration\BodyShapeType.cs" />
+    <Compile Include="Enumeration\BodySideLocationType.cs" />
+    <Compile Include="Enumeration\CoachType.cs" />
+    <Compile Include="Enumeration\DiceType.cs" />
+    <Compile Include="Enumeration\DiceVolatility.cs" />
     <Compile Include="Enumeration\PlayerEvasionType.cs" />
     <Compile Include="Enumeration\Volatility.cs" />
-    <Compile Include="RandomProperty\Dice.cs" />
+    <Compile Include="Factory.cs" />
+    <Compile Include="Players\Parts\Arm.cs" />
+    <Compile Include="Players\Parts\Base\Appendage.cs" />
+    <Compile Include="Players\Parts\Base\IAppendage.cs" />
+    <Compile Include="Players\Parts\Base\IBodyPart.cs" />
+    <Compile Include="Players\Parts\Base\IBone.cs" />
+    <Compile Include="Players\Parts\Base\IMuscle.cs" />
+    <Compile Include="Players\Parts\Base\Phalange.cs" />
+    <Compile Include="Players\Parts\Finger.cs" />
+    <Compile Include="Players\Parts\Head.cs" />
+    <Compile Include="Players\Parts\Leg.cs" />
+    <Compile Include="Players\Parts\Neck.cs" />
+    <Compile Include="Players\Parts\Toe.cs" />
+    <Compile Include="Players\Parts\Torso.cs" />
+    <Compile Include="RandomProperty\DecimalDice.cs" />
+    <Compile Include="RandomProperty\IDice.cs" />
+    <Compile Include="RandomProperty\WholeDice.cs" />
     <Compile Include="RandomProperty\DiceShaker.cs" />
     <Compile Include="RandomProperty\RandomDouble.cs" />
     <Compile Include="RndObject.cs" />
@@ -77,7 +100,7 @@
     <Compile Include="Enumeration\Goal.cs" />
     <Compile Include="Enumeration\Influence.cs" />
     <Compile Include="Enumeration\PositionType.cs" />
-    <Compile Include="Enumeration\RunStyle.cs" />
+    <Compile Include="Enumeration\PostureStyle.cs" />
     <Compile Include="Enumeration\ThrowStyle.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -117,6 +140,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

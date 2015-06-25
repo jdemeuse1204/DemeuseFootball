@@ -8,12 +8,12 @@ using DemeuseFootball15.RandomProperty;
 
 namespace DemeuseFootball15.Players
 {
-	public class RandomPlayer : Player
+	public class RanndomPlayer : Player
 	{
 		/// <summary>
 		/// Randomizes player stats
 		/// </summary>
-        public RandomPlayer(DiceShaker shaker)
+        public RanndomPlayer(DiceShaker shaker)
 		{
 			// Get Random player
 
@@ -70,7 +70,7 @@ namespace DemeuseFootball15.Players
 		    {
 		        var attr = property.GetCustomAttribute<DiceAttribute>();
 
-                property.SetValue(this, shaker.Roll(attr.Min, attr.Max));
+                property.SetValue(this, shaker.Roll(attr as dynamic));
 		    }
 
 		    //this.Metabolism = Services.NextDouble(70, 30, 4, 2, 40, 70);

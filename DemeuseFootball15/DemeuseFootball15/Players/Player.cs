@@ -2,13 +2,33 @@
 using System.Collections.Generic;
 using DemeuseFootball15.Attributes;
 using DemeuseFootball15.Enumeration;
+using DemeuseFootball15.Players.Parts;
 
 namespace DemeuseFootball15.Players
 {
 	public abstract class Player
 	{
-		#region General
-		public IEnumerable<PlayerGoal> Goals { get { return _goals; } }
+        // when a player plants his foot and such.... change of tearing a muscle if not flexible, fatigue
+
+        #region Appendages
+        public Arm LeftArm { get; protected set; }
+
+        public Arm RightArm { get; protected set; }
+
+        public Leg LeftLeg { get; protected set; }
+
+        public Leg RightLeg { get; protected set; }
+
+	    public Neck Neck { get; protected set; }
+
+        public Head Head { get; protected set; }
+
+        public Torso Torso { get; protected set; }
+        #endregion
+
+
+        #region General
+        public IEnumerable<PlayerGoal> Goals { get { return _goals; } }
 		public IEnumerable<PlayerInfluence> HighSchoolInfluences { get; protected set; }
 		public IEnumerable<PlayerInfluence> CollegiateInfluences { get; protected set; }
 		public IEnumerable<PlayerInfluence> ProInfluences { get; protected set; }
@@ -18,7 +38,7 @@ namespace DemeuseFootball15.Players
 		protected List<PlayerInfluence> _collegiateInfluences { get; set; }
 		protected List<PlayerInfluence> _proInfluences { get; set; }
 
-		public RunStyle RunningStyle { get; protected set; }
+		public PostureStyle RunningStyle { get; protected set; }
 
 		public ThrowStyle ThrowingStyle { get; protected set; }
 
@@ -31,7 +51,9 @@ namespace DemeuseFootball15.Players
         [Dice(3)]
         public BodyShapeType BodyShape { get; protected set; }
 
+        [Dice(4)]
         public PlayerEvasionType EvasionType { get; protected set; }
+
 		public DateTime DateOfBirth { get; protected set; }
 		public int Age
 		{
@@ -65,21 +87,31 @@ namespace DemeuseFootball15.Players
         public double ArmLength { get; protected set; }// inches
 
         [Dice(20, 70)]
-        public double Hand { get; protected set; }// inches
+        public double Hand { get; protected set; } // inches
 
         [Dice(20, 70)]
-        public double Foot { get; protected set; }// inches
+        public double Foot { get; protected set; } // inches
 
         [Dice(20, 70)]
         public double GrowthLeft { get; protected set; } // inches
 
         [Dice(20, 70)]
         public double Metabolism { get; protected set; }
+
+        public double BoneDensity { get; protected set; }
 		#endregion
 
 		#region Athleticism
+        //http://www.thestrengthandconditioningblog.com/2012/07/physical-characteristics-of-sprinters.html
         [Dice(20, 70)]
-		public double Speed { get; protected set; }
+		public double Speed { get; protected set; } // equate to MPH, what are the physical traits that make people a fast runner
+
+        #region Physiology/Intangibles
+        public double MuscleFibreTwitch { get; protected set; } // endowed with a dominance of the fast-twitch fibre and such
+
+        // ligament strength
+        // joint strength
+        #endregion
 
         [Dice(20, 70)]
 		public double Strength { get; protected set; }
@@ -177,8 +209,18 @@ namespace DemeuseFootball15.Players
         [Dice(20, 70)]
         public double ImmuneSystem { get; protected set; }
 
+        public double MentalToughness { get; protected set; }
+
+        public double Flexibility { get; protected set; }
+
+        public double SelfProtection { get; protected set; } // how well does this person protect themselves from hits
+
+        public double Fatigue { get; protected set; }
+
+        public double ThrowingMechanics { get; protected set; }
+
         // TODO - diseases : major-minor (dormant)
-        // TODO - pedirgee : family genes (can determine linemen and such
+        // TODO - pedirgee : family genes (can determine linemen and such)
 		#endregion
 
 		// Done
@@ -197,7 +239,6 @@ namespace DemeuseFootball15.Players
 		#endregion
 
         #region Talent
-
         [Dice(20, 70)]
         public double Awareness { get; protected set; }
 
@@ -227,9 +268,20 @@ namespace DemeuseFootball15.Players
 
         [Dice(20, 70)]
         public double Technique { get; protected set; }					// Higher is better for player progression
+
+        [Dice(20, 70)]
+        public double CollegiateFootballKnowledge { get; protected set; }
+
+        [Dice(20, 70)]
+        public double ProfessionalFootballKnowledge { get; protected set; }
+
+        [Dice(20, 70)]
+        public double Adaptation { get; protected set; } // can they adapt from youth to college to pros?
 		#endregion
 
         #region Character
+        [Dice(20, 70)]
+        public double Resilience { get; protected set; }
 
         [Dice(20, 70)]
         public double Confidence { get; protected set; }
@@ -263,6 +315,9 @@ namespace DemeuseFootball15.Players
 
         [Dice(20, 70)]
         public double Coachable { get; protected set; }
+
+        // make stack like struct that has order 1-x of things responded to
+        public CoachType ResposeToCoachTypes { get; protected set; }
 		#endregion
 	}
 }

@@ -5,7 +5,8 @@
     /// </summary>
     public enum Volatility
     {
-        _1 = 1,
+        _0,
+        _1,
         _2,
         _3,
         _4,

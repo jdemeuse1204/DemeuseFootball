@@ -2,11 +2,9 @@
 {
     public enum PlayerEvasionType
     {
+        OneCut = 1,
         AnkleBreaker,
-        JukeMaster,
-        StiffArmsR_US,
         TheBus,
-        CatchMeIfYouCan,
-        GetLow // frank gore
+        Prototype
     }
 }

@@ -15,6 +15,32 @@ namespace DemeuseFootball15.Console
                 
             }
 
+            var test = Factory.Create();
+
         }
+    }
+
+    public partial class Factory
+    {
+
+        public static P Create()
+        {
+            return new MyClass();
+        }
+        
+        
+    }
+
+    public partial class Factory
+    {
+        protected class MyClass : P
+        {
+
+        } 
+    }
+
+    public abstract class P
+    {
+        public int ID { get; set; }
     }
 }
