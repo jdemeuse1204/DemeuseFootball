@@ -4,16 +4,18 @@ using DemeuseFootball15.Enumeration;
 namespace DemeuseFootball15.Attributes
 {
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
-    public class DecmalDiceAttribute : DiceAttribute
+    public class DecimalDiceAttribute : DiceAttribute
     {
-        public DecmalDiceAttribute(int min, int max)
+        public DecimalDiceAttribute(int order, int min, int max)
+            : base(order)
         {
             Min = min;
             Max = max;
             Volatility = DiceVolatility._0;
         }
 
-        public DecmalDiceAttribute(int min, int max, DiceVolatility volatility)
+        public DecimalDiceAttribute(int order, int min, int max, DiceVolatility volatility)
+            : base(order)
         {
             Min = min;
             Max = max;

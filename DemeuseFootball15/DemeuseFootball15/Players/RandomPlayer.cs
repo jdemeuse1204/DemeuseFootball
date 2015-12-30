@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using DemeuseFootball15.Attributes;
 using DemeuseFootball15.Enumeration;
-using DemeuseFootball15.RandomProperty;
 
 namespace DemeuseFootball15.Players
 {
@@ -13,7 +10,7 @@ namespace DemeuseFootball15.Players
 		/// <summary>
 		/// Randomizes player stats
 		/// </summary>
-        public RanndomPlayer(DiceShaker shaker)
+        public RanndomPlayer()
 		{
 			// Get Random player
 
@@ -52,26 +49,19 @@ namespace DemeuseFootball15.Players
 			var min = yearDate;
 			var max = yearDate.AddDays(days);
 
-			this.DateOfBirth = yearDate.AddDays(findBday);
+			
 
 			// Physical Traits
-			if (this.Age == 10)
-			{
-				this.Height = Services.NextDouble(54.5, 5, 3, 3, 48, 62);
-			}
-			else
-			{
-				this.Height = Services.NextDouble(56.5, 8, 3, 3, 50, 64);
-			}
+			//if (this.Age == 10)
+			//{
+			//	this.Height = Services.NextDouble(54.5, 5, 3, 3, 48, 62);
+			//}
+			//else
+			//{
+			//	this.Height = Services.NextDouble(56.5, 8, 3, 3, 50, 64);
+			//}
 
-		    var properties = this.GetType().GetProperties().Where(w => w.GetCustomAttribute<DiceAttribute>() != null);
-
-		    foreach (var property in properties)
-		    {
-		        var attr = property.GetCustomAttribute<DiceAttribute>();
-
-                property.SetValue(this, shaker.Roll(attr as dynamic));
-		    }
+		    
 
 		    //this.Metabolism = Services.NextDouble(70, 30, 4, 2, 40, 70);
 
@@ -187,44 +177,44 @@ namespace DemeuseFootball15.Players
 				maxThreshhold = 78;
 			}
 
-			if (Age == 11)
-			{
-				mean += 8;
-				stdDev += 8;
-				minThreshhold += 8;
-				maxThreshhold += 8;
-			}
+			//if (Age == 11)
+			//{
+			//	mean += 8;
+			//	stdDev += 8;
+			//	minThreshhold += 8;
+			//	maxThreshhold += 8;
+			//}
 
 			// TODO Adjust for height
 
-			if (this.Height > 50 && this.Height <= 55)
-			{
-				mean += 8;
-				stdDev += 8;
-				minThreshhold += 8;
-				maxThreshhold += 8;
-			}
-			else if (this.Height > 55 && this.Height <= 60)
-			{
-				mean += 12;
-				stdDev += 12;
-				minThreshhold += 12;
-				maxThreshhold += 12;
-			}
-			else if (this.Height > 60 && this.Height <= 65)
-			{
-				mean += 16;
-				stdDev += 16;
-				minThreshhold += 12;
-				maxThreshhold += 12;
-			}
-			else if (this.Height > 65)
-			{
-				mean += 22;
-				stdDev += 22;
-				minThreshhold += 16;
-				maxThreshhold += 16;
-			}
+			//if (this.Height > 50 && this.Height <= 55)
+			//{
+			//	mean += 8;
+			//	stdDev += 8;
+			//	minThreshhold += 8;
+			//	maxThreshhold += 8;
+			//}
+			//else if (this.Height > 55 && this.Height <= 60)
+			//{
+			//	mean += 12;
+			//	stdDev += 12;
+			//	minThreshhold += 12;
+			//	maxThreshhold += 12;
+			//}
+			//else if (this.Height > 60 && this.Height <= 65)
+			//{
+			//	mean += 16;
+			//	stdDev += 16;
+			//	minThreshhold += 12;
+			//	maxThreshhold += 12;
+			//}
+			//else if (this.Height > 65)
+			//{
+			//	mean += 22;
+			//	stdDev += 22;
+			//	minThreshhold += 16;
+			//	maxThreshhold += 16;
+			//}
 
 			return Services.NextDouble(mean, stdDev, 6, 6, minThreshhold, maxThreshhold);
 		}
@@ -300,12 +290,12 @@ namespace DemeuseFootball15.Players
 					goal = (Goal)rnd;
 				}
 
-				goals.Add(new PlayerGoal()
-				{
-					Goal = goal,
-					AgeStarted = this.Age,
-					Priority = i
-				});
+				//goals.Add(new PlayerGoal()
+				//{
+				//	Goal = goal,
+				//	AgeStarted = this.Age,
+				//	Priority = i
+				//});
 			}
 
 			return goals;

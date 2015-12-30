@@ -5,7 +5,7 @@ using DemeuseFootball15.Enumeration;
 
 namespace DemeuseFootball15.RandomProperty
 {
-    public class DiceShaker
+    public class DiceShaker : IDiceShaker
     {
         private readonly List<IDice> _dice;
   
@@ -30,7 +30,7 @@ namespace DemeuseFootball15.RandomProperty
             return (int)dice.Shake();
         }
 
-        public double Roll(DecmalDiceAttribute diceAttribute)
+        public double Roll(DecimalDiceAttribute diceAttribute)
         {
             var dice =
                 _dice.FirstOrDefault(

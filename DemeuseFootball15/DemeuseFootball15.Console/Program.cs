@@ -1,4 +1,5 @@
 ﻿using DemeuseFootball15.Players;
+using DemeuseFootball15.Players.Attributes;
 using DemeuseFootball15.RandomProperty;
 
 namespace DemeuseFootball15.Console
@@ -7,40 +8,18 @@ namespace DemeuseFootball15.Console
     {
         static void Main(string[] args)
         {
-            var shaker = new DiceShaker();
-            Player player = new RandomPlayer(shaker);
+            //var a = new Age();
+            //var w = new Weight();
 
-            if (player != null)
+            //a.OnChange += w.OnPropertyChanged;
+
+            var shaker = new DiceShaker();
+            var test = Factory.CreatePlayer(shaker);
+
+            if (test != null)
             {
                 
             }
-
-            var test = Factory.Create();
-
         }
-    }
-
-    public partial class Factory
-    {
-
-        public static P Create()
-        {
-            return new MyClass();
-        }
-        
-        
-    }
-
-    public partial class Factory
-    {
-        protected class MyClass : P
-        {
-
-        } 
-    }
-
-    public abstract class P
-    {
-        public int ID { get; set; }
     }
 }

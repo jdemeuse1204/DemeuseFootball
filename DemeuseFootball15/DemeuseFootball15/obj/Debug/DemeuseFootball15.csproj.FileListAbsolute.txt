@@ -37,3 +37,16 @@ C:\Users\jdemeuse\Documents\GitHub\DemeuseFootball\DemeuseFootball15\DemeuseFoot
 C:\Users\jdemeuse\Documents\GitHub\DemeuseFootball\DemeuseFootball15\DemeuseFootball15\obj\Debug\DemeuseFootball15.csproj.GenerateResource.Cache
 C:\Users\jdemeuse\Documents\GitHub\DemeuseFootball\DemeuseFootball15\DemeuseFootball15\bin\Debug\DemeuseFootball15.exe
 C:\Users\jdemeuse\Documents\GitHub\DemeuseFootball\DemeuseFootball15\DemeuseFootball15\bin\Debug\DemeuseFootball15.pdb
+C:\Users\jdemeuse\Documents\GitHubVisualStudio\DemeuseFootball\DemeuseFootball15\DemeuseFootball15\bin\Debug\DemeuseFootball15.exe.config
+C:\Users\jdemeuse\Documents\GitHubVisualStudio\DemeuseFootball\DemeuseFootball15\DemeuseFootball15\obj\Debug\DemeuseFootball15.exe
+C:\Users\jdemeuse\Documents\GitHubVisualStudio\DemeuseFootball\DemeuseFootball15\DemeuseFootball15\obj\Debug\DemeuseFootball15.pdb
+C:\Users\jdemeuse\Documents\GitHubVisualStudio\DemeuseFootball\DemeuseFootball15\DemeuseFootball15\obj\Debug\MainWindow.baml
+C:\Users\jdemeuse\Documents\GitHubVisualStudio\DemeuseFootball\DemeuseFootball15\DemeuseFootball15\obj\Debug\MainWindow.g.cs
+C:\Users\jdemeuse\Documents\GitHubVisualStudio\DemeuseFootball\DemeuseFootball15\DemeuseFootball15\obj\Debug\App.g.cs
+C:\Users\jdemeuse\Documents\GitHubVisualStudio\DemeuseFootball\DemeuseFootball15\DemeuseFootball15\obj\Debug\DemeuseFootball15_MarkupCompile.cache
+C:\Users\jdemeuse\Documents\GitHubVisualStudio\DemeuseFootball\DemeuseFootball15\DemeuseFootball15\obj\Debug\DemeuseFootball15.g.resources
+C:\Users\jdemeuse\Documents\GitHubVisualStudio\DemeuseFootball\DemeuseFootball15\DemeuseFootball15\obj\Debug\DemeuseFootball15.Properties.Resources.resources
+C:\Users\jdemeuse\Documents\GitHubVisualStudio\DemeuseFootball\DemeuseFootball15\DemeuseFootball15\obj\Debug\DemeuseFootball15.csproj.GenerateResource.Cache
+C:\Users\jdemeuse\Documents\GitHubVisualStudio\DemeuseFootball\DemeuseFootball15\DemeuseFootball15\bin\Debug\DemeuseFootball15.exe
+C:\Users\jdemeuse\Documents\GitHubVisualStudio\DemeuseFootball\DemeuseFootball15\DemeuseFootball15\bin\Debug\DemeuseFootball15.pdb
+C:\Users\jdemeuse\Documents\GitHubVisualStudio\DemeuseFootball\DemeuseFootball15\DemeuseFootball15\obj\Debug\DemeuseFootball15.csprojResolveAssemblyReference.cache

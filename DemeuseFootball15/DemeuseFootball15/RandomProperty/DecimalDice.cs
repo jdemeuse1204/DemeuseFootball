@@ -15,7 +15,7 @@ namespace DemeuseFootball15.RandomProperty
 
         private static RandomNumberGenerator randomNumberGenerator;
 
-        public DecimalDice(DecmalDiceAttribute dice)
+        public DecimalDice(DecimalDiceAttribute dice)
             : this()
         {
             MinValue = dice.Min;
