@@ -52,5 +52,12 @@ namespace DemeuseFootball15.RandomProperty
 
             return dice.Shake();
         }
+
+        public double RandomRoll(double min, double max)
+        {
+            var dice = new DecimalDice(min, max, Volatility._0);
+
+            return dice.Shake();
+        }
     }
 }

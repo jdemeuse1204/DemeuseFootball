@@ -4,7 +4,7 @@ using DemeuseFootball15.RandomProperty;
 
 namespace DemeuseFootball15.Players.Attributes
 {
-    public class Agility : PlayerAttribute
+    public class Acceleration : PlayerAttribute
     {
         [PotentialProperty]
         private double _strengthModifier { get; set; }
@@ -30,23 +30,23 @@ namespace DemeuseFootball15.Players.Attributes
             // strength modifier
             if (strength <= 30)
             {
-                _strengthModifier = shaker.RandomRoll(-.2, -.1);
+                _strengthModifier = shaker.RandomRoll(-.3, -.2);
             }
             else if (strength > 30 && strength <= 60)
             {
-                _strengthModifier = shaker.RandomRoll(-.1, 0);
+                _strengthModifier = shaker.RandomRoll(-.15, -.05);
             }
             else if (strength > 60 && strength <= 75)
             {
-                _strengthModifier = shaker.RandomRoll(0, .2);
+                _strengthModifier = shaker.RandomRoll(.09, .15);
             }
             else if (strength > 75 && strength <= 90)
             {
-                _strengthModifier = shaker.RandomRoll(-.05, .05);
+                _strengthModifier = shaker.RandomRoll(.15, .19);
             }
             else
             {
-                _strengthModifier = shaker.RandomRoll(-.2,-.15);
+                _strengthModifier = shaker.RandomRoll(.19, .25);
             }
 
             // twitch modifier
@@ -56,41 +56,41 @@ namespace DemeuseFootball15.Players.Attributes
             }
             else if (twitch > 30 && twitch <= 60)
             {
-                _twitchModifier = shaker.RandomRoll(-.8, .05);
+                _twitchModifier = shaker.RandomRoll(-.8, 0);
             }
             else if (twitch > 60 && twitch <= 75)
             {
-                _twitchModifier = shaker.RandomRoll(.05, .12);
+                _twitchModifier = shaker.RandomRoll(.03, .06);
             }
             else if (twitch > 75 && twitch <= 90)
             {
-                _twitchModifier = shaker.RandomRoll(.12, .19);
+                _twitchModifier = shaker.RandomRoll(.06, .09);
             }
             else
             {
-                _twitchModifier = shaker.RandomRoll(.19, .25);
+                _twitchModifier = shaker.RandomRoll(.09, .15);
             }
 
             // How much of the flexibility should we take
             if (flexibility <= 30)
             {
-                _flexibilityModifier = shaker.RandomRoll(-.1,.1);
+                _flexibilityModifier = shaker.RandomRoll(-.2, 0);
             }
             else if (flexibility > 30 && flexibility <= 60)
             {
-                _flexibilityModifier = shaker.RandomRoll(0, .1);
+                _flexibilityModifier = shaker.RandomRoll(-.1, 0);
             }
             else if (flexibility > 60 && flexibility <= 75)
             {
-                _flexibilityModifier = shaker.RandomRoll(0, .15);
+                _flexibilityModifier = shaker.RandomRoll(0, .05);
             }
             else if (flexibility > 75 && flexibility <= 90)
             {
-                _flexibilityModifier = shaker.RandomRoll(.1, .2);
+                _flexibilityModifier = shaker.RandomRoll(.05, .08);
             }
             else
             {
-                _flexibilityModifier = shaker.RandomRoll(.25, .3);
+                _flexibilityModifier = shaker.RandomRoll(.08, .12);
             }
 
             var result = _calculateValue(player, value);

@@ -5,7 +5,7 @@ namespace DemeuseFootball15.RandomProperty
 {
     public class RandomDouble
     {
-        public RandomDouble(double mean, double standardDeviation, Volatility volatility)
+        public static double Next(double mean, double standardDeviation, Volatility volatility)
         {
             var v = (int) volatility;
             var total = 0d;
@@ -15,14 +15,7 @@ namespace DemeuseFootball15.RandomProperty
                 total += SimpleRNG.GetNormal(mean, standardDeviation);
             }
 
-            Value = total / v;
+            return total / v;
         }
-
-        public RandomDouble(double value)
-        {
-            Value = value;
-        }
-
-        public double Value { get; private set; }
     }
 }

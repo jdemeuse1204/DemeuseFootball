@@ -55,10 +55,13 @@
     </ApplicationDefinition>
     <Compile Include="Attributes\DateDice.cs" />
     <Compile Include="Attributes\IDiceAttribute.cs" />
+    <Compile Include="Attributes\PotentialPropertyAttribute.cs" />
+    <Compile Include="Attributes\ProportionalityDice.cs" />
+    <Compile Include="Players\Attributes\Acceleration.cs" />
     <Compile Include="Players\Attributes\Adaptation.cs" />
     <Compile Include="Players\Attributes\Agility.cs" />
     <Compile Include="Attributes\DecmalDice.cs" />
-    <Compile Include="Attributes\DiceAttribute.cs" />
+    <Compile Include="Attributes\Dice.cs" />
     <Compile Include="Attributes\WholeDice.cs" />
     <Compile Include="Collection\OrderedStack.cs" />
     <Compile Include="Enumeration\BodyShapeType.cs" />
@@ -69,7 +72,9 @@
     <Compile Include="Enumeration\PlayerEvasionType.cs" />
     <Compile Include="Enumeration\Volatility.cs" />
     <Compile Include="Factory.cs" />
-    <Compile Include="Players\Attributes\ArmLength.cs" />
+    <Compile Include="Players\Attributes\ArmStrength.cs" />
+    <Compile Include="Players\Attributes\LegStrength.cs" />
+    <Compile Include="Players\Attributes\WingSpan.cs" />
     <Compile Include="Players\Attributes\Awareness.cs" />
     <Compile Include="Players\Attributes\BaseKnowledge.cs" />
     <Compile Include="Players\Attributes\BlockShedding.cs" />
@@ -160,6 +165,7 @@
     <Compile Include="Players\Parts\Torso.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="RandomProperty\DecimalDice.cs" />
+    <Compile Include="RandomProperty\Dice.cs" />
     <Compile Include="RandomProperty\IDice.cs" />
     <Compile Include="RandomProperty\IDiceShaker.cs" />
     <Compile Include="RandomProperty\WholeDice.cs" />

@@ -9,5 +9,7 @@ namespace DemeuseFootball15.RandomProperty
         double Roll(DecimalDiceAttribute diceAttribute);
 
         double RandomRoll(int min, int max);
+
+        double RandomRoll(double min, double max);
     }
 }

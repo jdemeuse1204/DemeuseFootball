@@ -3,7 +3,7 @@ using DemeuseFootball15.RandomProperty;
 
 namespace DemeuseFootball15.Players.Attributes
 {
-    public class ArmLength : PlayerAttribute
+    public class LegStrength : PlayerAttribute
     {
         public override void Calculate(Player player, IDiceShaker shaker)
         {

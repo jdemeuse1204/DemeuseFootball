@@ -31,12 +31,25 @@ namespace DemeuseFootball15
                         properties.Where(w => w.GetCustomAttribute<DiceAttribute>() != null)
                             .OrderBy(w => w.GetCustomAttribute<DiceAttribute>().Order))
                 {
-                    var instance = (IPlayerAttribute)Activator.CreateInstance(property.PropertyType);
                     var attribute = property.GetCustomAttribute<DiceAttribute>();
 
-                    instance.Create(this, shaker, attribute);
+                    if (property.PropertyType.IsSubclassOf(typeof(PlayerAttribute)))
+                    {
+                        var instance = (PlayerAttribute)Activator.CreateInstance(property.PropertyType);
+                        
+                        instance.Create(this, shaker, attribute);
 
-                    property.SetValue(this, instance);
+                        property.SetValue(this, instance);
+                        continue;
+                    }
+
+                    // plain property
+                    var value = shaker.Roll((dynamic) attribute);
+
+                    property.SetValue(this,
+                        property.PropertyType.IsEnum
+                            ? Enum.ToObject(property.PropertyType, value)
+                            : Convert.ChangeType(value, property.PropertyType));
                 }
             }
         }

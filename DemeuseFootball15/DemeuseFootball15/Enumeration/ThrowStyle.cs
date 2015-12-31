@@ -2,7 +2,7 @@
 {
 	public enum ThrowStyle
 	{
-		OverTheTop,
+		OverTheTop = 1,
 		SideArm,
 		Mixed,
 		ThreeQuarters
